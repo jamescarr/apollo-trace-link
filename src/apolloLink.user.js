@@ -13,11 +13,7 @@
 (function() {
     'use strict';
  
-    // Check if BASE_URL is set, otherwise ask the user to set it
-    let baseUrl = GM_getValue('BASE_URL');
-    if (!baseUrl) {
-        baseUrl = prompt('Please enter the BASE URL for the trace links:', 'https://care.signalfx.com/#/apm/traces/');
-        GM_setValue('BASE_URL', baseUrl);
+    BASE_URL = 'https://care.signalfx.com/#/apm/traces/');
 
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
@@ -40,7 +36,7 @@
                 if (traceIdCell && !traceIdCell.hasAttribute('data-trace-link-added')) {
                     const traceId = traceIdCell.innerText.trim();
                     const link = document.createElement('a');
-                    link.setAttribute('href', `${baseUrl}${traceId}`);
+                    link.setAttribute('href', `${BASE_URL}${traceId}`);
                     link.setAttribute('target', '_blank');
                     link.style.color = 'blue';
                     link.style.textDecoration = 'underline';
